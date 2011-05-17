@@ -20,7 +20,8 @@ describe Rack::ReverseProxy do
     end
 
     it "should forward requests to the calling app when the path is not matched" do
-      get '/'
+      stub_request(:get, 'http://example.com/').to_return(:headers => {'Status' => '200 OK'})
+	
       last_response.body.should == "Dummy App"
       last_response.should be_ok
     end
@@ -174,12 +175,6 @@ describe Rack::ReverseProxy do
     end
   end
 
-  describe "as a rack app" do
-    it "should respond with 404 when the path is not matched" do
-      get '/'
-      last_response.should be_not_found
-    end
-  end
 
 end
 

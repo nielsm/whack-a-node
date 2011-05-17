@@ -1,8 +1,8 @@
-require 'rack/proxy'
-class WhackANode < Rack::Proxy
+require 'rack/streaming_proxy'
+class WhackANode < Rack::StreamingProxy
 
   def rewrite_env(env)
-    env["PORT"] = "8810"
+    env["PORT"] = "8000"
 
     env
   end

@@ -9,15 +9,16 @@ describe "WhackANode" do
     end
   end
   
-  before(:each) do
-    @app = WhackyTest.new
+  def app
+     WhackANode.new
   end
+
+  #before(:each) do
+    #@app = WhackyTest.new
+  #end
    it "should have a port of 90210" do
-     @app.get "/"
-     response.should_not be_nil
-     @app.should_not be_nil
+     get "/"
+     last_response.should_not be_nil
+     #@app.should_not be_nil
    end
-  it "fails" do
-    fail "hey buddy, you should probably rename this file and start specing for real"
-  end
 end
