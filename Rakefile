@@ -15,8 +15,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "whack-a-node"
   gem.homepage = "http://github.com/nielsm/whack-a-node"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Run node apps as Rack apps}
+  gem.description = %Q{Extend your middleware to include Node.js}
   gem.email = "nmeersschaert@mac.com"
   gem.authors = ["Niels Meersschaert", "Matthew Jording"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
