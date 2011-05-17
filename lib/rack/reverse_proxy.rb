@@ -3,6 +3,8 @@ require 'net/https'
 
 module Rack
   class ReverseProxy
+   
+
     def initialize(app = nil, &b)
       @app = app || lambda { [404, [], []] }
       @paths = {}
@@ -14,6 +16,8 @@ module Rack
       rackreq = Rack::Request.new(env)
       matcher, url = get_matcher_and_url rackreq.fullpath
       return @app.call(env) if matcher.nil?
+      
+      
 
       uri = get_uri(url, matcher, rackreq.fullpath) 
       headers = Rack::Utils::HeaderHash.new
@@ -54,6 +58,7 @@ module Rack
     end
     
     private
+
 
     def get_matcher_and_url path
       matches = @paths.select do |matcher, url|
