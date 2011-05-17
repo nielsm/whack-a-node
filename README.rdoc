@@ -5,20 +5,18 @@ Node apps running in any rack server as a endpoint, and potentially a middleware
 Leverage authentication, authorization and more in front of your node apps, letting node be used for high concurrency portions of your app.
 
 == Usage
-match "/blog" => MyNodeApp.new, :anchor => false
 
-class MyNodeApp < WhackANode
-redirect false
-paths = ["/foo", "/bar"]
-host "www.example.com"
-port 8810
-end
+match "/proxy" => WhackANode.new("/")
 
-Alternatively, for simple apps, you can use 
+This will attempt to reach a node server on localhost at port 8810.  The response will be proxied by Rack.
 
-match "/blog" => WhackANode.new("/daily","www.example.com", 2306, true)
+match "/redirect" => WhackANode.new("/","www.example.com", 2306, true)
+
+This will redirect to a node server at www.example.com on port 2306.  
 
 In this case, the last param causes the WhackANode to actually redirect instead of proxy the request.  In some cases, this can result in faster performance, as you don't have to have a Rack instance sitting around for the whole request.
+
+Generally speaking, using the proxy over a Rails controller ends up being about 8-10 times faster.  While still much slower than Node directly, this can still yield benefit.
 
 
 == Contributing to whack-a-node
