@@ -1,6 +1,25 @@
 = whack-a-node
 
-Description goes here.
+Node apps running in any rack server as a endpoint, and potentially a middleware layer.
+
+Leverage authentication, authorization and more in front of your node apps, letting node be used for high concurrency portions of your app.
+
+== Usage
+match "/blog" => MyNodeApp.new, :anchor => false
+
+class MyNodeApp < WhackANode
+redirect false
+paths = ["/foo", "/bar"]
+host "www.example.com"
+port 8810
+end
+
+Alternatively, for simple apps, you can use 
+
+match "/blog" => WhackANode.new("/daily","www.example.com", 2306, true)
+
+In this case, the last param causes the WhackANode to actually redirect instead of proxy the request.  In some cases, this can result in faster performance, as you don't have to have a Rack instance sitting around for the whole request.
+
 
 == Contributing to whack-a-node
  
@@ -14,6 +33,6 @@ Description goes here.
 
 == Copyright
 
-Copyright (c) 2011 Niels Meersschaert. See LICENSE.txt for
+Copyright (c) 2011 Niels Meersschaert & Matthew Jording. See LICENSE.txt for
 further details.
 
