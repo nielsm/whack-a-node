@@ -1,6 +1,8 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    addressable (2.2.5)
+    crack (0.1.8)
     diff-lcs (1.1.2)
     git (1.2.5)
     jeweler (1.5.2)
@@ -10,6 +12,8 @@ GEM
     rack (1.2.2)
     rack-proxy (0.3.4)
       rack
+    rack-test (0.5.7)
+      rack (>= 1.0)
     rake (0.8.7)
     rcov (0.9.9)
     rspec (2.3.0)
@@ -20,6 +24,9 @@ GEM
     rspec-expectations (2.3.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.3.0)
+    webmock (1.6.2)
+      addressable (>= 2.2.2)
+      crack (>= 0.1.7)
 
 PLATFORMS
   ruby
@@ -29,5 +36,7 @@ DEPENDENCIES
   jeweler (~> 1.5.2)
   rack
   rack-proxy
+  rack-test
   rcov
   rspec (~> 2.3.0)
+  webmock
