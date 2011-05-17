@@ -6,7 +6,7 @@ Leverage authentication, authorization and more in front of your node apps, lett
 
 == Installation
 
-	sudo gem install wack-a-node
+	sudo gem install whack-a-node
 
 
 == Usage
