@@ -13,7 +13,8 @@ class WhackANode
     URI("http://#{@host}:#{@port}#{@path}")
   end
   
-  def call(env)
+  def proxy_request
+    uri = self.uri
     session = Net::HTTP.new(uri.host, uri.port)
     session.start {|http|
       req = Net::HTTP::Get.new(uri.request_uri)
@@ -26,6 +27,14 @@ class WhackANode
 
       [res.code, create_response_headers(res), [body]]
       }
+  end
+  
+  def forward_request
+    [ 302, {'Location'=> uri.to_s }, [] ]
+  end
+  
+  def call(env)
+    return @redirect ? forward_request : proxy_request
   end
   
     private
