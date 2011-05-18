@@ -3,8 +3,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'rspec'
 require 'rack/test'
 require 'whack-a-node'
-require 'rack/reverse_proxy'
-require 'rack/streaming_proxy'
+require 'whack-a-dnode'
 require 'webmock/rspec'
     
 # Requires supporting files with custom matchers and macros, etc,

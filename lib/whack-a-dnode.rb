@@ -1,15 +1,16 @@
-class WhackANode
-  
-  def initialize(path,host="localhost", port="8810",redirect=false)
+require 'dnode'
+require 'eventmachine'
+require 'events'
+class WhackADnode
+  def initialize(path, host="localhost", port="8820", redirect=false)
     @path = path
     @host = host
     @port = port
     @redirect = redirect
-    @paths = {}
-  end
-  
-  def uri
-    URI("http://#{@host}:#{@port}#{@path}")
+    @dnode = DNode.new({
+      :f => proc { |x,cb| cb.call(x) }
+    }).listen(@port)
+
   end
   
   def proxy_request
@@ -27,7 +28,7 @@ class WhackANode
       [res.code, create_response_headers(res), [body]]
       }
   end
-  
+
   def forward_request
     [ 302, {'Location'=> uri.to_s }, [] ]
   end

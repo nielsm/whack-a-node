@@ -4,6 +4,9 @@ GEM
     addressable (2.2.5)
     crack (0.1.8)
     diff-lcs (1.1.2)
+    dnode (0.0.1)
+    eventmachine (0.12.10)
+    events (0.9.5)
     git (1.2.5)
     jeweler (1.5.2)
       bundler (~> 1.0.0)
@@ -33,6 +36,9 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.0.0)
+  dnode
+  eventmachine
+  events
   jeweler (~> 1.5.2)
   rack
   rack-proxy
