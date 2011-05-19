@@ -11,7 +11,7 @@ Reach a node app as an RPC directly from your Rails models (coming soon)
 * Ruby 1.8.7 or 1.9.2 work fine
 * Node.js  
 	brew install node (or equivalent for your environment)
-* Rack[http://rack.rubyforge.org/](or Rails 3)
+* Rack[http://rack.rubyforge.org/] (or Rails 3)
 
 == Installation
 
@@ -21,15 +21,13 @@ Reach a node app as an RPC directly from your Rails models (coming soon)
 
 In Rails 3's routes.rb:
 
-	match "/proxy" => WhackANode.new("/")
+	match "/proxy" => WhackANode::Proxy.new("/")
 
 This will attempt to reach a node server on localhost at port 8810.  The response will be proxied by Rack.
 
-	match "/redirect" => WhackANode.new("/","www.example.com", 2306, true)
+	match "/redirect" => WhackANode::Redirect.new("/","www.example.com", 2306)
 
-This will redirect to a node server at www.example.com on port 2306.  
-
-In this case, the last param causes the WhackANode to actually redirect instead of proxy the request.  In some cases, this can result in faster performance, as you don't have to have a Rack instance sitting around for the whole request.
+This will redirect to a node server at www.example.com on port 2306.  In some cases, this can result in faster performance, as you don't have to have a Rack instance sitting around for the whole request.
 
 Generally speaking, using the proxy over a Rails controller ends up being about 8-10 times faster.  While still much slower than Node directly, this can still yield benefit.
 
@@ -51,7 +49,7 @@ Start the node server by running node server.js
 === Rails server
 Create a new Rails app.  Add the following to routes.rb
 
-	match "/proxy" => WhackANode.new("/")  -- WhackANode defaults to localhost port 8810, so this will work with above server
+	match "/proxy" => WhackANode::Proxy.new("/")  -- WhackANode defaults to localhost port 8810, so this will work with above server
 	
 Add Whack-A-Node to your Gemfile:
 
