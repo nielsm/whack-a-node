@@ -1,12 +1,7 @@
 require 'net/http'
 module WhackANode
   class Proxy
-    
-    def initialize(path="/",host="localhost", port="8810")
-      @path = path
-      @host = host
-      @port = port
-    end
+    include WhackANode::Whacky
     
     def call(env)
       uri = self.uri
@@ -19,14 +14,8 @@ module WhackANode
             body << segment
           end
         end
-
         [res.code, create_response_headers(res), [body]]
         }
-      
-    end
-    
-    def uri
-      URI("http://#{@host}:#{@port}#{@path}")
     end
     
     private
