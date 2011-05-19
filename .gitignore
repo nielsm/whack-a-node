@@ -43,3 +43,4 @@ pkg
 
 /whack-a-node.gemspec
 .DS_Store
+*.gem
