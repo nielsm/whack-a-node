@@ -1,39 +1,40 @@
 require 'dnode'
 require 'eventmachine'
 require 'events'
-class WhackADnode
-  def initialize(path="/",host="localhost", port="8820", redirect=false)
-    @path = path
-    @host = host
-    @port = port
-    @redirect = redirect
-    
-  end
-  
-  def proxy_request
-    uri = self.uri
-    session = Net::HTTP.new(uri.host, uri.port)
-    session.start {|http|
-      req = Net::HTTP::Get.new(uri.request_uri)
-      body = ''
-      res = http.request(req) do |res|
-        res.read_body do |segment|
-          body << segment
+module WhackANode
+  class Rpc
+    def initialize(path="/",host="localhost", port="8820", redirect=false)
+      @path = path
+      @host = host
+      @port = port
+      @redirect = redirect
+
+    end
+
+    def proxy_request
+      uri = self.uri
+      session = Net::HTTP.new(uri.host, uri.port)
+      session.start {|http|
+        req = Net::HTTP::Get.new(uri.request_uri)
+        body = ''
+        res = http.request(req) do |res|
+          res.read_body do |segment|
+            body << segment
+          end
         end
-      end
 
-      [res.code, create_response_headers(res), [body]]
+        [res.code, create_response_headers(res), [body]]
       }
-  end
+    end
 
-  def forward_request
-    [ 302, {'Location'=> uri.to_s }, [] ]
-  end
-  
-  def call(env)
-    return @redirect ? forward_request : proxy_request
-  end
-  
+    def forward_request
+      [ 302, {'Location'=> uri.to_s }, [] ]
+    end
+
+    def call(env)
+      return @redirect ? forward_request : proxy_request
+    end
+
     private
 
 
@@ -83,20 +84,21 @@ class WhackADnode
       @paths.merge!(matcher => url)
       @opts.merge!(opts)
     end
-  
 
-  def rewrite_env(env)
-    env["PORT"] = "8000"
 
-    env
+    def rewrite_env(env)
+      env["PORT"] = "8000"
+
+      env
+    end
+
+    def rewrite_response(triplet)
+      status, headers, body = triplet
+
+      headers["X-Foo"] = "Bar"
+
+      triplet
+    end
+
   end
-
-  def rewrite_response(triplet)
-    status, headers, body = triplet
-
-    headers["X-Foo"] = "Bar"
-
-    triplet
-  end
-
 end

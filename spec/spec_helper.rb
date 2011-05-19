@@ -3,7 +3,6 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'rspec'
 require 'rack/test'
 require 'whack-a-node'
-require 'whack-a-dnode'
 require 'webmock/rspec'
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
