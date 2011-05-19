@@ -1,7 +1,7 @@
 module WhackANode
   class Redirect
     
-    def initialize(path,host="localhost", port="8810")
+    def initialize(path="/",host="localhost", port="8810")
       @path = path
       @host = host
       @port = port

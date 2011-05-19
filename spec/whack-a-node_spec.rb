@@ -4,7 +4,7 @@ require 'rack/test'
 describe "WhackANode" do
   include Rack::Test::Methods
   include WebMock::API
-  class WhackyTest < WhackANode
+  class WhackyTest < WhackANode::Proxy
     def rewrite_env(env)
       env['PORT'] = 90210
     end
