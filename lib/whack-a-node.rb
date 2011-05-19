@@ -1,6 +1,6 @@
 class WhackANode
   
-  def initialize(path,host="localhost", port="8810",redirect=false)
+  def initialize(path="/",host="localhost", port="8810",redirect=false)
     @path = path
     @host = host
     @port = port

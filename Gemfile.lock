@@ -13,8 +13,6 @@ GEM
       git (>= 1.2.5)
       rake
     rack (1.2.2)
-    rack-proxy (0.3.4)
-      rack
     rack-test (0.5.7)
       rack (>= 1.0)
     rake (0.8.7)
@@ -41,7 +39,6 @@ DEPENDENCIES
   events
   jeweler (~> 1.5.2)
   rack
-  rack-proxy
   rack-test
   rcov
   rspec (~> 2.3.0)

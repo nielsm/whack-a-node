@@ -2,15 +2,12 @@ require 'dnode'
 require 'eventmachine'
 require 'events'
 class WhackADnode
-  def initialize(path, host="localhost", port="8820", redirect=false)
+  def initialize(path="/",host="localhost", port="8820", redirect=false)
     @path = path
     @host = host
     @port = port
     @redirect = redirect
-    @dnode = DNode.new({
-      :f => proc { |x,cb| cb.call(x) }
-    }).listen(@port)
-
+    
   end
   
   def proxy_request
