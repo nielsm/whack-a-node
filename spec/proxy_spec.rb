@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 require 'rack/test'
 
-describe "WhackANode" do
+describe "WhackANode::Proxy" do
   include Rack::Test::Methods
   include WebMock::API
   class WhackyTest < WhackANode::Proxy
@@ -11,7 +11,7 @@ describe "WhackANode" do
   end
   
   def app
-     WhackANode.new
+     WhackANode::Proxy.new
   end
 
   #before(:each) do
